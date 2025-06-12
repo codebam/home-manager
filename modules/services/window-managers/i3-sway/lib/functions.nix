@@ -82,12 +82,14 @@ rec {
         {
           names,
           style ? "",
+          gravity ? "",
           size ? "",
         }:
         optionalString (names != [ ]) concatStringsSep " " (
           lib.remove "" [
             "font"
             "pango:${concatStringsSep ", " names}"
+            gravity
             style
             size
           ]
@@ -99,6 +101,7 @@ rec {
     else
       toFontStr {
         inherit (fontCfg) names style;
+        gravity = fontCfg.gravity or "";
         size = toString fontCfg.size;
       };
 

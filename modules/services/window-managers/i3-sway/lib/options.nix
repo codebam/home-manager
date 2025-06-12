@@ -44,6 +44,15 @@ let
         '';
         example = 11.5;
       };
+
+      gravity = mkOption {
+        type = types.nullOr (types.enum [
+          "Not-Rotated" "South" "Upside-Down" "North"
+          "Rotated-Left" "East" "Rotated-Right" "West"
+        ]);
+        default = "Not-Rotated";
+        description = "Pango gravity value for text rotation in ${moduleName} bar (e.g., 'East' for 90-degree clockwise rotation).";
+      };
     };
   };
 
@@ -111,6 +120,7 @@ let
               names = [ "DejaVu Sans Mono" "FontAwesome5Free" ];
               style = "Bold Semi-Condensed";
               size = 11.0;
+              gravity = "East";
             }
           '';
           description = "Font configuration for this bar.";
